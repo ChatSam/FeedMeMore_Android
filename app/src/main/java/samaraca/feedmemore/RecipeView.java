@@ -4,30 +4,20 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.ListView;
 
 
-public class GroceryList extends ActionBarActivity {
-
-    private String groceryItems;
-    private ListView groceryList;
+public class RecipeView extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grocery_list);
-
-        groceryList = (ListView) findViewById(R.id.lstGroceryList);
-
-        groceryItems = getIntent().getStringExtra(QuickMeal.GROCERIES);
+        setContentView(R.layout.activity_recipe_view);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_grocery_list, menu);
+        getMenuInflater().inflate(R.menu.menu_recipe_view, menu);
         return true;
     }
 
@@ -44,12 +34,5 @@ public class GroceryList extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void populateGroceryList(String gItems){
-
-
-
     }
 }

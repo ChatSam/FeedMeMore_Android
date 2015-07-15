@@ -1,17 +1,36 @@
 package samaraca.feedmemore;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class QuickMeal extends ActionBarActivity {
+
+    public static final String GROCERIES = "GROCERIES";
+    private static EditText txtGroceries;
+    private String groceryList;
+    private static TextView itemCounter;
+    private TextView lastItemAdded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_meal);
+
+        txtGroceries = (EditText) findViewById(R.id.txtGroceries);
+
+        itemCounter = (TextView) findViewById(R.id.txtItemCounter);
+
+        lastItemAdded = (TextView) findViewById(R.id.txtLastItemAdded);
     }
 
     @Override
@@ -34,5 +53,64 @@ public class QuickMeal extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Adds each grocery item into a string varaible
+     * @param v
+     */
+    public void OnClickAddItem(View v){
+
+        if(groceryList == null){
+            groceryList = txtGroceries.getText().toString();
+
+        }else{
+            groceryList = groceryList+","+ txtGroceries.getText().toString();
+        }
+
+        lastItemAdded.setText(txtGroceries.getText().toString());
+
+        txtGroceries.setText("");
+
+        int itemCounterNumber = Integer.parseInt(itemCounter.getText().toString());
+
+        itemCounterNumber++;
+
+        String itemCounterDisplay = String.valueOf(itemCounterNumber);
+
+        itemCounter.setText(itemCounterDisplay);
+
+
+    }
+
+    /**
+     * Searches for recipes with the provided grocery items
+     * @param v
+     */
+    public void OnClickFindRecipes(View v){
+
+        if(groceryList == null) {
+            Intent recipeIntent = new Intent(this, RecipeView.class);
+
+            recipeIntent.putExtra(GROCERIES, txtGroceries.getText().toString());
+
+            startActivity(recipeIntent);
+
+        }else{
+            Toast.makeText(this,"Enter at least one Grocery item to find a recipe",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * Shows the list containing the gorceries added.
+     * @param v
+     */
+    public void onClickShowGroceryList(View v){
+
+        Intent groceryListIntent = new Intent(this,GroceryList.class);
+
+        groceryListIntent.putExtra(GROCERIES,groceryList);
+
+        startActivity(groceryListIntent);
     }
 }

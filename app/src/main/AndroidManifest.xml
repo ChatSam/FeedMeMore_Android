@@ -20,6 +20,10 @@
             android:name=".GroceryList"
             android:label="@string/title_activity_grocery_list" >
         </activity>
+        <activity
+            android:name=".RecipeView"
+            android:label="@string/title_activity_recipe_view" >
+        </activity>
     </application>
 
 </manifest>

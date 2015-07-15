@@ -5,4 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="lblMainCaption">Let\'s Get Cookin\' !</string>
     <string name="title_activity_grocery_list">Grocery List</string>
+    <string name="title_activity_recipe_view">RecipeView</string>
+    <string name="btnFindRecipes">Find Recipes !</string>
+    <string name="txtGroceries">add groceries, one at time</string>
+    <string name="btnAddItem">+</string>
+    <string name="lblLastItemAdded">Last Item Added</string>
+    <string name="txtLastItemAdded" />
+    <string name="hint1e">non</string>
+    <string name="hintNone">none</string>
 </resources>
