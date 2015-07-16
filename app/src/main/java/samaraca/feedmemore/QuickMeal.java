@@ -12,12 +12,15 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class QuickMeal extends ActionBarActivity {
 
     public static final String GROCERIES = "GROCERIES";
     private static EditText txtGroceries;
-    private String groceryList;
+    //private String groceryList;
+    private ArrayList<String> groceryList;
     private static TextView itemCounter;
     private TextView lastItemAdded;
 
@@ -31,6 +34,8 @@ public class QuickMeal extends ActionBarActivity {
         itemCounter = (TextView) findViewById(R.id.txtItemCounter);
 
         lastItemAdded = (TextView) findViewById(R.id.txtLastItemAdded);
+
+        groceryList = new ArrayList<String>();
     }
 
     @Override
@@ -61,24 +66,26 @@ public class QuickMeal extends ActionBarActivity {
      */
     public void OnClickAddItem(View v){
 
-        if(groceryList == null){
-            groceryList = txtGroceries.getText().toString();
 
-        }else{
-            groceryList = groceryList+","+ txtGroceries.getText().toString();
-        }
+        String currentItem = txtGroceries.getText().toString();
+
+        groceryList.add(currentItem);
 
         lastItemAdded.setText(txtGroceries.getText().toString());
 
         txtGroceries.setText("");
 
-        int itemCounterNumber = Integer.parseInt(itemCounter.getText().toString());
+        //int itemCounterNumber = Integer.parseInt(itemCounter.getText().toString());
 
-        itemCounterNumber++;
+        //itemCounterNumber++;
 
-        String itemCounterDisplay = String.valueOf(itemCounterNumber);
+        //String itemCounterDisplay = String.valueOf(itemCounterNumber);
 
-        itemCounter.setText(itemCounterDisplay);
+        //itemCounter.setText(itemCounterDisplay);
+
+        int groceryListSize = groceryList.size();
+
+        itemCounter.setText(String.valueOf(groceryListSize));
 
 
     }
@@ -89,10 +96,10 @@ public class QuickMeal extends ActionBarActivity {
      */
     public void OnClickFindRecipes(View v){
 
-        if(groceryList == null) {
+        if(groceryList.isEmpty() == false) {
             Intent recipeIntent = new Intent(this, RecipeView.class);
 
-            recipeIntent.putExtra(GROCERIES, txtGroceries.getText().toString());
+            recipeIntent.putStringArrayListExtra(GROCERIES, groceryList);
 
             startActivity(recipeIntent);
 

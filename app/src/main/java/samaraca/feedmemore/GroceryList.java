@@ -6,22 +6,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class GroceryList extends ActionBarActivity {
 
-    private String groceryItems;
+    //private String groceryItems;
     private ListView groceryList;
+    private ArrayList<String> groceryArrayList;
+    private ArrayList<String> groceryItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_grocery_list);
 
         groceryList = (ListView) findViewById(R.id.lstGroceryList);
 
-        groceryItems = getIntent().getStringExtra(QuickMeal.GROCERIES);
+        //groceryItems = getIntent().getStringExtra(QuickMeal.GROCERIES);
+
+        groceryItems = getIntent().getStringArrayListExtra(QuickMeal.GROCERIES);
+
+         ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,R.layout.list_element_container,groceryItems);
+
+        groceryList.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
     }
 
     @Override
