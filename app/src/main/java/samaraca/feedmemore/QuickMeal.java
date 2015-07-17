@@ -20,7 +20,7 @@ public class QuickMeal extends ActionBarActivity {
     public static final String GROCERIES = "GROCERIES";
     private static EditText txtGroceries;
     //private String groceryList;
-    private ArrayList<String> groceryList;
+    public static ArrayList<String> groceryList;
     private static TextView itemCounter;
     private TextView lastItemAdded;
 
@@ -69,6 +69,7 @@ public class QuickMeal extends ActionBarActivity {
 
         String currentItem = txtGroceries.getText().toString();
 
+        //add grocery items to the grocery list
         groceryList.add(currentItem);
 
         lastItemAdded.setText(txtGroceries.getText().toString());
@@ -109,7 +110,7 @@ public class QuickMeal extends ActionBarActivity {
     }
 
     /**
-     * Shows the list containing the gorceries added.
+     * Shows the list containing the groceries added.
      * @param v
      */
     public void onClickShowGroceryList(View v){

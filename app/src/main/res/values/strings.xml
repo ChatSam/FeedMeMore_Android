@@ -13,4 +13,9 @@
     <string name="txtLastItemAdded" />
     <string name="hint1e">non</string>
     <string name="hintNone">none</string>
+    <string name="lblNavQuickMeal">Quick Meal</string>
+    <string name="lblOr">or</string>
+    <string name="btnScanBarcode">Scan Barcode</string>
+    <string name="lblQuickMealCaption">Scan Barcode</string>
+    <string name="lblRecipeTitle">Recipe Title</string>
 </resources>

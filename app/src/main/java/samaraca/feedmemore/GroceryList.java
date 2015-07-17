@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,10 +16,11 @@ import java.util.Arrays;
 
 public class GroceryList extends ActionBarActivity {
 
-    //private String groceryItems;
     private ListView groceryList;
     private ArrayList<String> groceryArrayList;
     private ArrayList<String> groceryItems;
+    private EditText currentGroceries;
+    public static ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +28,22 @@ public class GroceryList extends ActionBarActivity {
 
         setContentView(R.layout.activity_grocery_list);
 
+        currentGroceries = (EditText) findViewById(R.id.txtGroceries);
+
         groceryList = (ListView) findViewById(R.id.lstGroceryList);
 
         //groceryItems = getIntent().getStringExtra(QuickMeal.GROCERIES);
 
+        //get the list of groceries from the Quick Meal Activity
         groceryItems = getIntent().getStringArrayListExtra(QuickMeal.GROCERIES);
 
-         ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,R.layout.list_element_container,groceryItems);
+
+        //create an adapter to populate the list with grocery items
+        adapter= new ArrayAdapter<String>(this,R.layout.list_element_container,groceryItems);
 
         groceryList.setAdapter(adapter);
 
+        //update the list if new items are added
         adapter.notifyDataSetChanged();
 
     }
@@ -62,10 +70,31 @@ public class GroceryList extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Adds a grocery item to the list view
+     * @param v
+     */
+    public void onClickAddItemToList(View v){
 
-    public void populateGroceryList(String gItems){
+        String item = currentGroceries.getText().toString();
+
+        //adding items to the grocery list
+        groceryItems.add(item);
+
+        QuickMeal.groceryList.add(item);
+
+        //updating the list view
+        adapter.notifyDataSetChanged();
+
+        currentGroceries.setText("");
+
+
+    }
+
+   /* public void populateGroceryList(String gItems){
 
 
 
     }
+    */
 }
