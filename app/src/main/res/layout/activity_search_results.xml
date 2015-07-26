@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="samaraca.feedmemore.SearchResults">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:id="@+id/linearLayout2"
+        android:paddingTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="0dp"
+        android:paddingLeft="0dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#ff3f52b5">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="@string/lblRecipeResult"
+                android:id="@+id/lblRecipeResults"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="#fffefefe"
+                android:textSize="16sp"
+                android:padding="0dp" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lstRecipeResults" />
+    </LinearLayout>
+
+</RelativeLayout>

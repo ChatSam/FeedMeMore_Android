@@ -10,8 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 
@@ -60,6 +58,9 @@ public class QuickMeal extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
     /**
      * Adds each grocery item into a string varaible
      * @param v
@@ -98,7 +99,7 @@ public class QuickMeal extends ActionBarActivity {
     public void OnClickFindRecipes(View v){
 
         if(groceryList.isEmpty() == false) {
-            Intent recipeIntent = new Intent(this, RecipeView.class);
+            Intent recipeIntent = new Intent(this, SearchResults.class);
 
             recipeIntent.putStringArrayListExtra(GROCERIES, groceryList);
 

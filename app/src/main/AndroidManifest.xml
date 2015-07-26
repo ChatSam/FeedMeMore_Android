@@ -24,6 +24,10 @@
             android:name=".RecipeView"
             android:label="@string/title_activity_recipe_view" >
         </activity>
+        <activity
+            android:name=".SearchResults"
+            android:label="@string/title_activity_search_results" >
+        </activity>
     </application>
 
 </manifest>

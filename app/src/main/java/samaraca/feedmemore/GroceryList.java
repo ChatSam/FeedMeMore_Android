@@ -39,7 +39,8 @@ public class GroceryList extends ActionBarActivity {
 
 
         //create an adapter to populate the list with grocery items
-        adapter= new ArrayAdapter<String>(this,R.layout.list_element_container,groceryItems);
+        //adapter= new ArrayAdapter<String>(this,R.layout.list_element_container,groceryItems);
+        adapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,groceryItems);
 
         groceryList.setAdapter(adapter);
 

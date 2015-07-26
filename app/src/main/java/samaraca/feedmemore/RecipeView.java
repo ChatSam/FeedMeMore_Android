@@ -4,14 +4,25 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class RecipeView extends ActionBarActivity {
 
+    private String recipeName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_recipe_view);
+
+        recipeName = getIntent().getStringExtra(SearchResults.RECIPE_NAME);
+
+        TextView txtRecipeName = (TextView) findViewById(R.id.lblRecipeTitle);
+
+        txtRecipeName.setText(recipeName);
     }
 
     @Override
