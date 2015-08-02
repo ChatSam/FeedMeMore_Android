@@ -101,17 +101,24 @@ public class RecipeView extends ActionBarActivity {
 
             String directionsDisplay = "Directions - ";
 
+            ArrayList<String> recipeDisplayElementsStrings = new ArrayList<>();
+
+            int counter = 0;
+
+            int maxIngredientFill;
+
             for(int a=0 ; a< ingredients.size(); a++){
 
                 String currentIngredient = ingredients.get(a).getName();
 
                 ingredientDisplay= ingredientDisplay+" , "+currentIngredient;
 
+                recipeDisplayElementsStrings.add(" - "+currentIngredient);
+
             }
 
-            ArrayList<String> recipeDisplayElementsStrings = new ArrayList<>();
 
-            recipeDisplayElementsStrings.add(ingredientDisplay);
+            //recipeDisplayElementsStrings.add(ingredientDisplay);
 
             for(int b=0 ; b< directions.size(); b++){
 
@@ -122,7 +129,6 @@ public class RecipeView extends ActionBarActivity {
                 recipeDisplayElementsStrings.add(currentDirection);
 
             }
-
 
 
           /*  TextView ingredientView = (TextView) findViewById(R.id.lblIngredients);
@@ -136,12 +142,6 @@ public class RecipeView extends ActionBarActivity {
             resultView = new ArrayAdapter<String>(RecipeView.this,android.R.layout.simple_list_item_1,recipeDisplayElementsStrings);
 
             recipeListView.setAdapter(resultView);
-
-
-
-
-            
-
 
 
          /*   ImageView recipeImage = (ImageView) findViewById(R.id.imgRecipeImage);

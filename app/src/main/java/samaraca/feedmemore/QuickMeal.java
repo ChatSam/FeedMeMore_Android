@@ -3,12 +3,16 @@ package samaraca.feedmemore;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 
@@ -121,5 +125,57 @@ public class QuickMeal extends ActionBarActivity {
         groceryListIntent.putExtra(GROCERIES,groceryList);
 
         startActivity(groceryListIntent);
+    }
+
+    /**
+     * Clears the items in the list
+     * @param V
+     */
+    public void onClickClearItems(View V){
+        groceryList.clear();
+
+        lastItemAdded.setText("");
+
+        itemCounter.setText("");
+
+    }
+
+
+
+    public void scanNow(View view) {
+//        Toast.makeText(this,"Button works",Toast.LENGTH_LONG).show();
+        IntentIntegrator.initiateScan(this);
+
+//        IntentIntegrator integrator = new IntentIntegrator(yourActivity);
+//        integrator.initiateScan();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+//        if (scanResult != null) {
+//            String re = scanResult.getContents();
+//            Log.d("code", re);
+////            Toast.makeText(this,"Button works",Toast.LENGTH_LONG).show();
+//            // handle scan result
+//        }
+//        if (requestCode == 0) {
+        if (resultCode == RESULT_OK) {
+            String contents = intent.getStringExtra("SCAN_RESULT");
+            String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+
+            // Handle successful scan
+            Toast toast = Toast.makeText(this, "Content:" + contents + " Format:" + format , Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 25, 400);
+            toast.show();
+        } else if (resultCode == RESULT_CANCELED) {
+            // Handle cancel
+            Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 25, 400);
+            toast.show();
+
+        }
+
+//
+//
     }
 }

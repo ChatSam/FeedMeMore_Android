@@ -6,7 +6,7 @@
     <string name="lblMainCaption">Let\'s Get Cookin\' !</string>
     <string name="title_activity_grocery_list">Grocery List</string>
     <string name="title_activity_recipe_view">RecipeView</string>
-    <string name="btnFindRecipes">Find Recipes !</string>
+    <string name="btnFindRecipes"> Find Recipes !</string>
     <string name="txtGroceries">add groceries, one at time</string>
     <string name="btnAddItem">+</string>
     <string name="lblLastItemAdded">Last Item Added</string>
@@ -21,4 +21,6 @@
     <string name="title_activity_search_results">Search Results</string>
     <string name="lblRecipeResult">Click on an item to see the recipe</string>
     <string name="imgRecipeViewDesc">image of the recipe</string>
+    <string name="btnClear">Clear Items</string>
+    <string name="lblZero">00</string>
 </resources>
