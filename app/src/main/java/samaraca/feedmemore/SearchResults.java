@@ -11,19 +11,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.feedmemore.dto.Ingredient;
 import com.feedmemore.dto.RecipeResult;
 
 import java.util.ArrayList;
 
+import samaraca.feedmemore.dao.IRecipeDAO;
+import samaraca.feedmemore.dao.OnlineRecipeDAO;
+import samaraca.feedmemore.dao.RecipeDAOStub;
+
 
 public class SearchResults extends ActionBarActivity {
 
-    public static final String RECIPE_NAME = "RECIPE_NAME";
+    public static final String RECIPE_ID = "RECIPE_ID";
     private ListView recipeSearchResultList;
-    private String groceryItemArray;
+    private ArrayList<String> groceryItemArray;
+    private ArrayList<RecipeResult> recipeResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +37,15 @@ public class SearchResults extends ActionBarActivity {
         recipeSearchResultList = (ListView) findViewById(R.id.lstRecipeResults);
 
         //array which contains all the groceries
-        groceryItemArray = getIntent().getStringExtra(QuickMeal.GROCERIES);
+        groceryItemArray = getIntent().getStringArrayListExtra(QuickMeal.GROCERIES);
 
         //creating a thread to load data from the service
         LoadRecipeResults loadResults = new LoadRecipeResults();
 
+        String searchString = convertToSearchString(groceryItemArray);
+
         //running the thread
-        loadResults.execute();
+        loadResults.execute(searchString);
 
         ListItemClicked();
 
@@ -68,28 +73,6 @@ public class SearchResults extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //dummy data to replicate a web service
-    public RecipeResult insertDummyData(){
-        RecipeResult dummyResult = new RecipeResult();
-
-        ArrayList<Ingredient> ingredients = new ArrayList<>();
-
-        Ingredient pepper = new Ingredient("Pepper","2","teaspoons");
-        ingredients.add(pepper);
-
-        Ingredient chicken = new Ingredient("Chicken","1","Kilograms");
-        ingredients.add(chicken);
-
-        String steps = "Sauté the chicken with cooking oil and add pepper";
-
-        dummyResult.setRecipeName("Lumprais");
-        dummyResult.setIngredients(ingredients);
-        dummyResult.setSteps(steps);
-
-        return dummyResult;
-
-    }
-
 
     //converts the groceries array to single string with comma seperated values
     private String convertToSearchString(ArrayList<String> groceryItemArray){
@@ -114,19 +97,22 @@ public class SearchResults extends ActionBarActivity {
         @Override
         protected ArrayList<RecipeResult> doInBackground(String... grocerySearchString) {
 
+            String grocerySearchStringUnit =  grocerySearchString[0];
+
             ArrayList<RecipeResult>resultList = new ArrayList<RecipeResult>();
 
-            RecipeResult result = new RecipeResult();
+            //IRecipeDAO recipeDAO = new RecipeDAOStub();
+            IRecipeDAO recipeDAO = new OnlineRecipeDAO();
 
-            result = insertDummyData();
+            ArrayList<RecipeResult> recipeResults = recipeDAO.fetchRecipes(grocerySearchStringUnit);
 
-            resultList.add(result);
-
-            return resultList;
+            return recipeResults;
         }
 
         @Override
         protected void onPostExecute(ArrayList<RecipeResult> recipeResults) {
+
+            SearchResults.this.recipeResults = recipeResults;
 
             ArrayList<String> recipeNameList = new ArrayList<String>();
 
@@ -144,8 +130,9 @@ public class SearchResults extends ActionBarActivity {
             recipeSearchResultList.setAdapter(resultView);
 
         }
-
     }
+
+
 
     //switches to the Recipe View activity when a list item is clicked.
     private void ListItemClicked() {
@@ -157,11 +144,23 @@ public class SearchResults extends ActionBarActivity {
 
                 final String recipeItemString = recipeItem.getText().toString();
 
-                Intent recipeViewIntent = new Intent(SearchResults.this,RecipeView.class);
 
-                recipeViewIntent.putExtra(RECIPE_NAME, recipeItemString);
+                for(int i = 0; i < recipeResults.size();i++){
+                    String recipeNameFromResults = recipeResults.get(i).getRecipeName();
 
-                startActivity(recipeViewIntent);
+                    if(recipeNameFromResults.equalsIgnoreCase(recipeItemString)){
+
+                        String recipeId = recipeResults.get(i).getId();
+
+                        Intent recipeViewIntent = new Intent(SearchResults.this,RecipeView.class);
+
+                        recipeViewIntent.putExtra(RECIPE_ID, recipeId);
+
+                        startActivity(recipeViewIntent);
+                    };
+                }
+
+
             }
         });
     }

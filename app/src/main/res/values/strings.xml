@@ -20,4 +20,5 @@
     <string name="lblRecipeTitle">Recipe Title</string>
     <string name="title_activity_search_results">Search Results</string>
     <string name="lblRecipeResult">Click on an item to see the recipe</string>
+    <string name="imgRecipeViewDesc">image of the recipe</string>
 </resources>

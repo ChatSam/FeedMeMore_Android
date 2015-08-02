@@ -8,7 +8,7 @@ public class Ingredient {
     private String quantity;
     private String unit;
 
-    Ingredient(){
+    public Ingredient(){
         this.name = null;
         this.quantity = null;
         this.unit = null;

@@ -1,17 +1,22 @@
 package com.feedmemore.dto;
 
-import java.util.ArrayList;
-
 /**
  * Created by ChatSam on 7/26/15.
  */
 public class RecipeResult {
-    private int id;
-    private String recipeName;
-    private ArrayList<Ingredient> ingredients;
-    private String steps;
-    private String imgUrl;
 
+
+    private String id;
+    private String recipeName;
+    private String recipeDetailsUrl;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getRecipeName() {
         return recipeName;
@@ -21,27 +26,12 @@ public class RecipeResult {
         this.recipeName = recipeName;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
+    public String getRecipeDetailsUrl() {
+        return recipeDetailsUrl;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeDetailsUrl(String recipeDetailsUrl) {
+        this.recipeDetailsUrl = recipeDetailsUrl;
     }
 
-    public String getSteps() {
-        return steps;
-    }
-
-    public void setSteps(String steps) {
-        this.steps = steps;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
 }
