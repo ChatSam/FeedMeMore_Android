@@ -74,7 +74,11 @@ public class SearchResults extends ActionBarActivity {
     }
 
 
-    //converts the groceries array to single string with comma seperated values
+    /**
+     *     converts the groceries array to single string with comma seperated values
+     * @param groceryItemArray - the grocery list
+     * @return
+     */
     private String convertToSearchString(ArrayList<String> groceryItemArray){
 
         String groceryItemString = null;
@@ -90,8 +94,9 @@ public class SearchResults extends ActionBarActivity {
         return groceryItemString;
     }
 
-    //class which handles multi threading
-    // loads recipe data from the web service
+    /**
+     * class which handles multi threading-loads recipe data from the web service
+     */
     class LoadRecipeResults extends AsyncTask<String,Integer,ArrayList<RecipeResult>>{
 
         @Override
@@ -116,6 +121,7 @@ public class SearchResults extends ActionBarActivity {
 
             ArrayList<String> recipeNameList = new ArrayList<String>();
 
+            //adds the name of the recipe from the dto object to an array list
             for(int i = 0; i < recipeResults.size(); i++){
 
                 String recipeName = recipeResults.get(i).getRecipeName();
@@ -123,6 +129,7 @@ public class SearchResults extends ActionBarActivity {
                 recipeNameList.add(recipeName);
             }
 
+            //setting the recipe name array list to a list view
             ArrayAdapter<String> resultView;
 
             resultView = new ArrayAdapter<String>(SearchResults.this,android.R.layout.simple_list_item_1,recipeNameList);
@@ -133,9 +140,12 @@ public class SearchResults extends ActionBarActivity {
     }
 
 
-
-    //switches to the Recipe View activity when a list item is clicked.
+    /**
+     *    switches to the Recipe View activity when a list item is clicked.
+     */
     private void ListItemClicked() {
+
+        //setup the list to respond to clicks
         recipeSearchResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
@@ -144,10 +154,12 @@ public class SearchResults extends ActionBarActivity {
 
                 final String recipeItemString = recipeItem.getText().toString();
 
-
+                // find the selected list element and find a recipe for the selected recipe name
                 for(int i = 0; i < recipeResults.size();i++){
-                    String recipeNameFromResults = recipeResults.get(i).getRecipeName();
 
+                    String recipeNameFromResults = recipeResults.get(i).getRecipeName();
+                    // check for the selected recipe name matches the recipes name in the 'recipe name' array list
+                    //and gets its ID
                     if(recipeNameFromResults.equalsIgnoreCase(recipeItemString)){
 
                         String recipeId = recipeResults.get(i).getId();
@@ -156,6 +168,7 @@ public class SearchResults extends ActionBarActivity {
 
                         recipeViewIntent.putExtra(RECIPE_ID, recipeId);
 
+                        //start activity to view the recipe
                         startActivity(recipeViewIntent);
                     };
                 }

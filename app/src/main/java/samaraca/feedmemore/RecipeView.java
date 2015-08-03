@@ -73,6 +73,9 @@ public class RecipeView extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Thread which handles loading data for the recipe details
+     */
     class LoadRecipeDetails extends AsyncTask<String,Integer,Recipe>{
 
 
@@ -131,12 +134,14 @@ public class RecipeView extends ActionBarActivity {
             }
 
 
-          /*  TextView ingredientView = (TextView) findViewById(R.id.lblIngredients);
+          /* TextView ingredientView = (TextView) findViewById(R.id.lblIngredients);
             ingredientView.setText(ingredientDisplay);
 
             TextView directionsView = (TextView) findViewById(R.id.lblDirections);
             directionsView.setText(directionsDisplay);
         */
+
+            //displaying the recipe ingredients and  recipe directions in the list view
             ArrayAdapter<String> resultView;
 
             resultView = new ArrayAdapter<String>(RecipeView.this,android.R.layout.simple_list_item_1,recipeDisplayElementsStrings);
